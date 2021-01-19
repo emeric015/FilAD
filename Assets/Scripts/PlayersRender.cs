@@ -67,7 +67,7 @@ public class PlayersRender : MonoBehaviour
         player.setParent(obj);
         PlayerLabel label = obj.GetComponent<PlayerLabel>();
         label.name = player.getName();
-        Debug.Log($"{player.name} just joined.");
+        Debug.Log($"{player.name} just joined in ({player.location.x}, {player.location.y}).");
     }
 
     void removePlayer(Player player) {

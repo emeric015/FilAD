@@ -28,11 +28,11 @@ public class ClientHandle : MonoBehaviour
     {
         int _myId = _packet.ReadInt();
         string _myUsername = _packet.ReadString();
-        float _myPositionX = _packet.ReadFloat();
-        float _myPositionY = _packet.ReadFloat();
-        //int _myRotation = _packet.ReadInt();
+        float _myX = _packet.ReadFloat();
+        float _myY = _packet.ReadFloat();
+        float _myZ = _packet.ReadFloat();
         
         Debug.Log("Received a message : Spawn New Player");
-        PlayersRender.instance.addPlayer(new Player(_myUsername, Vector3.zero));
+        PlayersRender.instance.addPlayer(new Player(_myUsername, new Vector3(_myX, _myY, _myZ)));
     }
 }
