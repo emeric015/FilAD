@@ -10,6 +10,7 @@ public class PlayersRender : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Client.instance.ConnectToServer();
         Player p1 = new Player("Jean", Vector3.zero);
         addPlayer(p1);
 
