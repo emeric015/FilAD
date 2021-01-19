@@ -21,7 +21,7 @@ public class PlayerLabel : MonoBehaviour
         label.transform.rotation = Camera.main.transform.rotation;
         TextMesh tm = label.AddComponent<TextMesh>();
         tm.text = name;
-        tm.color = new Color(0.8f, 0.8f, 0.8f);
+        tm.color = new Color(0.1f, 0.1f, 0.1f);
         tm.fontStyle = FontStyle.Bold;
         tm.alignment = TextAlignment.Center;
         tm.anchor = TextAnchor.MiddleCenter;
