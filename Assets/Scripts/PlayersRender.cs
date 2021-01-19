@@ -11,8 +11,8 @@ public class PlayersRender : MonoBehaviour
     void Start()
     {
         Client.instance.ConnectToServer();
-        Player p1 = new Player("Jean", Vector3.zero);
-        addPlayer(p1);
+        //Player p1 = new Player("Jean", Vector3.zero);
+        //addPlayer(p1);
 
     }
 

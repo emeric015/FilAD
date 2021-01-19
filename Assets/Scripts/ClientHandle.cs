@@ -30,7 +30,7 @@ public class ClientHandle : MonoBehaviour
         string _myUsername = _packet.ReadString();
         float _myPositionX = _packet.ReadFloat();
         float _myPositionY = _packet.ReadFloat();
-        int _myRotation = _packet.ReadInt();
+        //int _myRotation = _packet.ReadInt();
         
         Debug.Log("Received a message : Spawn New Player");
         //PlayersRender.addPlayer(new Player(_myUsername, Vector3.zero));
