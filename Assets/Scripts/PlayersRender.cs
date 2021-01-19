@@ -7,6 +7,22 @@ public class PlayersRender : MonoBehaviour
     private List<Player> otherPlayers = new List<Player>();
 
     public GameObject prefab;
+
+    public static PlayersRender instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Debug.Log("Instance already exists, destroying object!");
+            Destroy(this);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,13 +61,13 @@ public class PlayersRender : MonoBehaviour
         }
     }
 
-    void addPlayer(Player player) {
+    public void addPlayer(Player player) {
         otherPlayers.Add(player);
         GameObject obj = Instantiate(prefab, player.getLocation(), Quaternion.identity);
         player.setParent(obj);
-
         PlayerLabel label = obj.GetComponent<PlayerLabel>();
         label.name = player.getName();
+        Debug.Log($"{player.name} just joined.");
     }
 
     void removePlayer(Player player) {

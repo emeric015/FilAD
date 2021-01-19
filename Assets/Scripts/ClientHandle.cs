@@ -33,6 +33,6 @@ public class ClientHandle : MonoBehaviour
         //int _myRotation = _packet.ReadInt();
         
         Debug.Log("Received a message : Spawn New Player");
-        //PlayersRender.addPlayer(new Player(_myUsername, Vector3.zero));
+        PlayersRender.instance.addPlayer(new Player(_myUsername, Vector3.zero));
     }
 }
