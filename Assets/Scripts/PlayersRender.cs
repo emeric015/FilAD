@@ -43,11 +43,9 @@ public class PlayersRender : MonoBehaviour
             Vector3 diff = currentLocation - gameObjectLocation;
 
             player.getParent().transform.position = player.getLocation();
-            if(Math.Abs(diff.x) <= 1 && Math.Abs(diff.y) <= 1) {
-                player.getParent().GetComponent<Animator>().SetFloat("moveX", diff.x);
-                player.getParent().GetComponent<Animator>().SetFloat("moveY", diff.y);
-                player.getParent().GetComponent<Animator>().SetBool("moving", true);
-            }
+            player.getParent().GetComponent<Animator>().SetFloat("moveX", diff.x);
+            player.getParent().GetComponent<Animator>().SetFloat("moveY", diff.y);
+            player.getParent().GetComponent<Animator>().SetBool("moving", true);
         }
         else {
             player.getParent().GetComponent<Animator>().SetBool("moving", false);
