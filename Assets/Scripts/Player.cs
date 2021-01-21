@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player
 {
-    private string name;
-    private Vector3 location;
+    public string name { get; private set; }
+    public Vector3 location { get; private set; }
     private GameObject parent;
     private Area currentArea;
 

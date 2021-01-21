@@ -46,5 +46,6 @@ public class PlayerMovement : MonoBehaviour
         myRigidbody.MovePosition(
             transform.position + change * speed * Time.deltaTime
         );
+        ClientSend.UdpMyPlayerMoved();
     }
 }

@@ -9,14 +9,28 @@ public class PlayersRender : MonoBehaviour
 
     public GameObject prefab;
 
-    private Animator animator;
 
-    public Player p1;
+    public static PlayersRender instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Debug.Log("Instance already exists, destroying object!");
+            Destroy(this);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        p1 = new Player("Jean", Vector3.zero);
-        addPlayer(p1);
+        Client.instance.ConnectToServer();
+        //Player p1 = new Player("Jean", Vector3.zero);
+        //addPlayer(p1);
 
         animator = gameObject.GetComponent<Animator>();
     }
@@ -82,15 +96,15 @@ public class PlayersRender : MonoBehaviour
         }
     }
 
-    void addPlayer(Player player) {
+    public void addPlayer(Player player) {
         otherPlayers.Add(player);
         GameObject obj = Instantiate(prefab, player.getLocation(), Quaternion.identity);
         obj.gameObject.AddComponent<Animator>();
         
         player.setParent(obj);
-
         PlayerLabel label = obj.GetComponent<PlayerLabel>();
         label.name = player.getName();
+        Debug.Log($"{player.name} just joined in ({player.location.x}, {player.location.y}).");
     }
 
     void removePlayer(Player player) {
