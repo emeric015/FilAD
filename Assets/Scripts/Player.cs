@@ -5,7 +5,8 @@ using UnityEngine;
 public class Player
 {
     public string name { get; private set; }
-    public Vector3 location { get; private set; }
+    public Vector3 location;
+    //{ get; private set; }
     private GameObject parent;
     private Area currentArea;
     private int id;

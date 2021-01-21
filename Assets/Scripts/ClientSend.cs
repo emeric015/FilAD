@@ -21,9 +21,10 @@ public class ClientSend : MonoBehaviour
     {
         using (Packet _packet = new Packet((int)ClientPackets.welcomeReceived))
         {
+            //string name = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLabel>().name;
             _packet.Write(Client.instance.myId);
-            string name = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLabel>().name;
-            _packet.Write("TOTO");
+            _packet.Write("TEST");
+            //_packet.Write(name);
 
             SendTCPData(_packet);
         }
@@ -39,11 +40,14 @@ public class ClientSend : MonoBehaviour
         }
     }
 
-    public static void UdpMyPlayerMoved()
+    public static void UdpMyPlayerMoved(Vector3 _position)
     {
         using (Packet _packet = new Packet((int)ClientPackets.udpPlayerMovement))
         {
-            _packet.Write("I MOVED");
+            //_packet.Write("I MOVED");
+            _packet.Write(_position.x);
+            _packet.Write(_position.y);
+            _packet.Write(_position.z);
 
             SendUDPData(_packet);
         }

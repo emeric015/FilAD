@@ -36,6 +36,10 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("moveX", change.x);
             animator.SetFloat("moveY", change.y);
             animator.SetBool("moving", true);
+            //
+            ClientSend.UdpMyPlayerMoved(transform.position);
+            //transform.position
+
         } else{
             animator.SetBool("moving", false);
         }
@@ -46,6 +50,5 @@ public class PlayerMovement : MonoBehaviour
         myRigidbody.MovePosition(
             transform.position + change * speed * Time.deltaTime
         );
-        ClientSend.UdpMyPlayerMoved();
     }
 }

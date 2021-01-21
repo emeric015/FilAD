@@ -77,8 +77,13 @@ public class PlayersRender : MonoBehaviour
         otherPlayers.Remove(player.getId());
         //TODO remove gameObject
     }
+    // player.setLocation()
 
-    Dictionary<int, Player> getPlayers() {
+    private Dictionary<int, Player> getPlayers() {
         return otherPlayers;
+    }
+
+    public void setPlayerPosition(int id, Vector3 position){
+        getPlayers()[id].location = position;
     }
 }
