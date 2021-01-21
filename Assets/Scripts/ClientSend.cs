@@ -22,6 +22,7 @@ public class ClientSend : MonoBehaviour
         using (Packet _packet = new Packet((int)ClientPackets.welcomeReceived))
         {
             _packet.Write(Client.instance.myId);
+            string name = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLabel>().name;
             _packet.Write("TOTO");
 
             SendTCPData(_packet);
