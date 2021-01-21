@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayersRender : MonoBehaviour
 {
     private List<Player> otherPlayers = new List<Player>();
 
     public GameObject prefab;
+
 
     public static PlayersRender instance;
 
@@ -30,11 +32,30 @@ public class PlayersRender : MonoBehaviour
         //Player p1 = new Player("Jean", Vector3.zero);
         //addPlayer(p1);
 
+        animator = gameObject.GetComponent<Animator>();
     }
 
     void UpdatePlayerMovement(Player player)
     {
-        player.getParent().transform.position = player.getLocation();
+        Debug.Log("Checking " + player.getName());
+
+        Vector3 currentLocation = player.getLocation();
+        Vector3 gameObjectLocation = player.getParent().transform.position;
+
+        if(currentLocation != gameObjectLocation) {
+            Debug.Log("Moving !");
+            Vector3 diff = currentLocation - gameObjectLocation;
+
+            player.getParent().transform.position = player.getLocation();
+            if(Math.Abs(diff.x) <= 1 && Math.Abs(diff.y) <= 1) {
+                player.getParent().GetComponent<Animator>().SetFloat("moveX", diff.x);
+                player.getParent().GetComponent<Animator>().SetFloat("moveY", diff.y);
+                player.getParent().GetComponent<Animator>().SetBool("moving", true);
+            }
+        }
+        else {
+            player.getParent().GetComponent<Animator>().SetBool("moving", false);
+        }
 
         /*Animator animator = player.GetComponent<Animator>();
 
@@ -56,6 +77,20 @@ public class PlayersRender : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        System.Random rnd = new System.Random();
+        if(rnd.Next(60) == 1 || true) {
+            //float xChange = rnd.Next(3) - 1;
+            //float yChange = rnd.Next(3) - 1;
+            float xChange = -1;
+            float yChange = 0;
+
+            Vector3 change = new Vector3(xChange, yChange, 0);
+            change *= 2f * Time.deltaTime;
+            change += p1.getLocation();
+
+            p1.setLocation(change);
+        }
+
         foreach(Player player in otherPlayers) {
             UpdatePlayerMovement(player);
         }
@@ -64,6 +99,8 @@ public class PlayersRender : MonoBehaviour
     public void addPlayer(Player player) {
         otherPlayers.Add(player);
         GameObject obj = Instantiate(prefab, player.getLocation(), Quaternion.identity);
+        obj.gameObject.AddComponent<Animator>();
+        
         player.setParent(obj);
         PlayerLabel label = obj.GetComponent<PlayerLabel>();
         label.name = player.getName();
