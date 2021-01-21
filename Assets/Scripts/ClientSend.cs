@@ -21,10 +21,10 @@ public class ClientSend : MonoBehaviour
     {
         using (Packet _packet = new Packet((int)ClientPackets.welcomeReceived))
         {
-            //string name = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLabel>().name;
+            string name = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLabel>().name;
             _packet.Write(Client.instance.myId);
-            _packet.Write("TEST");
-            //_packet.Write(name);
+            //_packet.Write("TEST");
+            _packet.Write(name);
 
             SendTCPData(_packet);
         }
