@@ -9,6 +9,7 @@ public class PlayersRender : MonoBehaviour
 
     public GameObject prefab;
 
+    public Animator animator;
 
     public static PlayersRender instance;
 
@@ -29,8 +30,6 @@ public class PlayersRender : MonoBehaviour
     void Start()
     {
         Client.instance.ConnectToServer();
-        //Player p1 = new Player("Jean", Vector3.zero);
-        //addPlayer(p1);
 
         animator = gameObject.GetComponent<Animator>();
     }
@@ -56,41 +55,11 @@ public class PlayersRender : MonoBehaviour
         else {
             player.getParent().GetComponent<Animator>().SetBool("moving", false);
         }
-
-        /*Animator animator = player.GetComponent<Animator>();
-
-        if (change != Vector3.zero)
-        {
-            if(change.x != 0) {
-                change.y = 0;
-            }
-
-            MoveCharacter();
-            animator.SetFloat("moveX", change.x);
-            animator.SetFloat("moveY", change.y);
-            animator.SetBool("moving", true);
-        } else{
-            animator.SetBool("moving", false);
-        }*/
     }
 
     // Update is called once per frame
     void Update()
     {
-        System.Random rnd = new System.Random();
-        if(rnd.Next(60) == 1 || true) {
-            //float xChange = rnd.Next(3) - 1;
-            //float yChange = rnd.Next(3) - 1;
-            float xChange = -1;
-            float yChange = 0;
-
-            Vector3 change = new Vector3(xChange, yChange, 0);
-            change *= 2f * Time.deltaTime;
-            change += p1.getLocation();
-
-            p1.setLocation(change);
-        }
-
         foreach(Player player in otherPlayers) {
             UpdatePlayerMovement(player);
         }
