@@ -33,6 +33,6 @@ public class ClientHandle : MonoBehaviour
         float _myZ = _packet.ReadFloat();
         
         Debug.Log("Received a message : Spawn New Player");
-        PlayersRender.instance.addPlayer(new Player(_myUsername, new Vector3(_myX, _myY, _myZ)));
+        PlayersRender.instance.addPlayer(new Player(_myUsername, new Vector3(_myX, _myY, _myZ), _myId));
     }
 }

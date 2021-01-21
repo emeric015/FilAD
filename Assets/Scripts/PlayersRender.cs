@@ -5,7 +5,7 @@ using System;
 
 public class PlayersRender : MonoBehaviour
 {
-    private List<Player> otherPlayers = new List<Player>();
+    private Dictionary<int, Player> otherPlayers = new Dictionary<int, Player>();
 
     public GameObject prefab;
 
@@ -36,13 +36,10 @@ public class PlayersRender : MonoBehaviour
 
     void UpdatePlayerMovement(Player player)
     {
-        Debug.Log("Checking " + player.getName());
-
         Vector3 currentLocation = player.getLocation();
         Vector3 gameObjectLocation = player.getParent().transform.position;
 
         if(currentLocation != gameObjectLocation) {
-            Debug.Log("Moving !");
             Vector3 diff = currentLocation - gameObjectLocation;
 
             player.getParent().transform.position = player.getLocation();
@@ -60,13 +57,13 @@ public class PlayersRender : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach(Player player in otherPlayers) {
-            UpdatePlayerMovement(player);
+        foreach(KeyValuePair<int, Player> entry in otherPlayers) {
+            UpdatePlayerMovement(entry.Value);
         }
     }
 
     public void addPlayer(Player player) {
-        otherPlayers.Add(player);
+        otherPlayers.Add(player.getId(), player);
         GameObject obj = Instantiate(prefab, player.getLocation(), Quaternion.identity);
         obj.gameObject.AddComponent<Animator>();
         
@@ -77,11 +74,11 @@ public class PlayersRender : MonoBehaviour
     }
 
     void removePlayer(Player player) {
-        otherPlayers.Remove(player);
+        otherPlayers.Remove(player.getId());
         //TODO remove gameObject
     }
 
-    List<Player> getPlayers() {
+    Dictionary<int, Player> getPlayers() {
         return otherPlayers;
     }
 }

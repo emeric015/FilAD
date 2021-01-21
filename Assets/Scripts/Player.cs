@@ -8,11 +8,13 @@ public class Player
     public Vector3 location { get; private set; }
     private GameObject parent;
     private Area currentArea;
+    private int id;
 
-    public Player(string name, Vector3 location)
+    public Player(string name, Vector3 location, int id)
     {
         this.name = name;
         this.location = location;
+        this.id = id;
     }
 
     public void updateLocation(Vector3 newLocation) {
@@ -45,5 +47,13 @@ public class Player
 
     public void setArea(Area area) {
         this.currentArea = area;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
