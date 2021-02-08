@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FrameLimiter : MonoBehaviour
 {
-    private int FPS_LIMIT = 600;
+    private int FPS_LIMIT = 30;
 
     void Awake()
     {

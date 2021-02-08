@@ -72,8 +72,10 @@ public class PlayersRender : MonoBehaviour
     }
 
     void removePlayer(Player player) {
-        otherPlayers.Remove(player.getId());
-        Destroy(player.getParent());
+        if(player != null && otherPlayers.ContainsKey(player.getId())) {
+            otherPlayers.Remove(player.getId());
+            Destroy(player.getParent());
+        }
     }
 
     private Dictionary<int, Player> getPlayers() {
@@ -81,6 +83,8 @@ public class PlayersRender : MonoBehaviour
     }
 
     public void setPlayerPosition(int id, Vector3 position){
-        getPlayers()[id].location = position;
+        if(otherPlayers.ContainsKey(id)) {
+            getPlayers()[id].location = position;
+        }
     }
 }
