@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     void MoveCharacter()
     {
         myRigidbody.MovePosition(
-            transform.position + change * speed * Time.deltaTime
+            transform.position + change * speed * Time.fixedDeltaTime
         );
     }
 }
