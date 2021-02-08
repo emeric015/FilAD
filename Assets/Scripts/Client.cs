@@ -48,6 +48,7 @@ public class Client : MonoBehaviour
     {
         InitializeClientData();
 
+        isConnected = true;
         tcp.Connect();
     }
 
@@ -109,7 +110,7 @@ public class Client : MonoBehaviour
                 int _byteLength = stream.EndRead(_result);
                 if (_byteLength <= 0)
                 {
-                    // TODO: disconnect
+                    instance.Disconnect();
                     return;
                 }
 
@@ -121,7 +122,7 @@ public class Client : MonoBehaviour
             }
             catch
             {
-                // TODO: disconnect
+                Disconnect();
             }
         }
 
@@ -169,6 +170,14 @@ public class Client : MonoBehaviour
             }
 
             return false;
+        }
+
+        private void Disconnect(){
+            instance.Disconnect();
+            stream = null;
+            receivedData = null;
+            receiveBuffer = null;
+            socket = null;
         }
     }
 
@@ -220,7 +229,7 @@ public class Client : MonoBehaviour
 
                 if (_data.Length < 4)
                 {
-                    // TODO: disconnect
+                    instance.Disconnect();
                     return;
                 }
 
@@ -228,7 +237,7 @@ public class Client : MonoBehaviour
             }
             catch
             {
-                // TODO: disconnect
+                Disconnect();
             }
         }
 
@@ -248,6 +257,12 @@ public class Client : MonoBehaviour
                     packetHandlers[_packetId](_packet);
                 }
             });
+        }
+
+        private void Disconnect(){
+            instance.Disconnect();
+            endPoint = null;
+            socket = null;
         }
     }
     
