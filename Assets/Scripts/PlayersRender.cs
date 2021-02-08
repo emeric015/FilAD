@@ -48,7 +48,7 @@ public class PlayersRender : MonoBehaviour
             player.getParent().GetComponent<Animator>().SetBool("moving", true);
         }
         else {
-            player.getParent().GetComponent<Animator>().SetBool("moving", false);
+            //player.getParent().GetComponent<Animator>().SetBool("moving", false);
         }
     }
 
@@ -73,9 +73,8 @@ public class PlayersRender : MonoBehaviour
 
     void removePlayer(Player player) {
         otherPlayers.Remove(player.getId());
-        //TODO remove gameObject
+        Destroy(player.getParent());
     }
-    // player.setLocation()
 
     private Dictionary<int, Player> getPlayers() {
         return otherPlayers;
