@@ -16,6 +16,8 @@ public class Client : MonoBehaviour
     public TCP tcp;
     public UDP udp;
 
+    private bool isConnected = false;
+
     private delegate void PacketHandler(Packet _packet);
     private static Dictionary<int, PacketHandler> packetHandlers;
 
@@ -36,6 +38,10 @@ public class Client : MonoBehaviour
     {
         tcp = new TCP();
         udp = new UDP();
+    }
+
+    private void onApplicationQuit(){
+        Disconnect();
     }
 
     public void ConnectToServer()
@@ -255,5 +261,15 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.udpPlayerMovement, ClientHandle.MovePlayer }
         };
         Debug.Log("Initialized packets.");
+    }
+
+    private void Disconnect(){
+        if (isConnected){
+            isConnected = false;
+            tcp.socket.Close();
+            udp.socket.Close();
+
+            Debug.Log("Disconnected from server.");
+        }
     }
 }
