@@ -11,6 +11,8 @@ public class LoginScript : MonoBehaviour
 
     public Text errorText;
 
+    public static string playerName;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,7 @@ public class LoginScript : MonoBehaviour
     void OnConnect()
     {
         if(!string.IsNullOrEmpty(inputField.text)) {
-            PlayerLabel.playerName = inputField.text;
+            playerName = inputField.text;
             SceneManager.LoadScene("SampleScene");
         }
         else {

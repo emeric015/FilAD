@@ -8,7 +8,9 @@ public class PlayerLabel : MonoBehaviour
 
     GameObject label;
 
-    public static string playerName;
+    public string playerName;
+
+    public TextMesh tm;
 
     // Start is called before the first frame update
 
@@ -19,7 +21,7 @@ public class PlayerLabel : MonoBehaviour
         label.layer = 0;
 
         label.transform.rotation = Camera.main.transform.rotation;
-        TextMesh tm = label.AddComponent<TextMesh>();
+        tm = label.AddComponent<TextMesh>();
         tm.text = playerName;
         tm.color = new Color(0.1f, 0.1f, 0.1f);
         tm.fontStyle = FontStyle.Bold;

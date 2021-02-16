@@ -32,6 +32,10 @@ public class PlayersRender : MonoBehaviour
         Client.instance.ConnectToServer();
 
         animator = gameObject.GetComponent<Animator>();
+
+        PlayerLabel label = gameObject.GetComponent<PlayerLabel>();
+        label.tm.text = LoginScript.playerName;
+        Debug.Log("Label update : " + label);
     }
 
     void UpdatePlayerMovement(Player player)
