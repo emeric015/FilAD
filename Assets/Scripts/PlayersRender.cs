@@ -48,7 +48,7 @@ public class PlayersRender : MonoBehaviour
             player.getParent().GetComponent<Animator>().SetBool("moving", true);
         }
         else {
-            //player.getParent().GetComponent<Animator>().SetBool("moving", false);
+            player.getParent().GetComponent<Animator>().SetBool("moving", false);
         }
     }
 
