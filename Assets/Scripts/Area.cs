@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using agora_gaming_rtc;
 
 public class Area : MonoBehaviour
 {
@@ -26,6 +27,13 @@ public class Area : MonoBehaviour
             Debug.Log("Entered on " + box.name);
 
             currentObject.setArea(this);
+  
+            // Agora.io Implimentation
+            IRtcEngine mRtcEngine = IRtcEngine.GetEngine(AgoraInterfaceScript.appId);
+            var channelName = box.name;
+            mRtcEngine.LeaveChannel();
+            mRtcEngine.JoinChannel(channelName, "extra", 0); // join the channel with given match name
+            Debug.Log("joining channel:" + channelName);
         }
     }
 
