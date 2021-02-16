@@ -8,7 +8,7 @@ public class PlayerLabel : MonoBehaviour
 
     GameObject label;
 
-    public string playerName;
+    public string name;
 
     public TextMesh tm;
 
@@ -22,7 +22,7 @@ public class PlayerLabel : MonoBehaviour
 
         label.transform.rotation = Camera.main.transform.rotation;
         tm = label.AddComponent<TextMesh>();
-        tm.text = playerName;
+        tm.text = name;
         tm.color = new Color(0.1f, 0.1f, 0.1f);
         tm.fontStyle = FontStyle.Bold;
         tm.alignment = TextAlignment.Center;
