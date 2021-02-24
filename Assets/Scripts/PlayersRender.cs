@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class PlayersRender : MonoBehaviour
@@ -12,6 +13,8 @@ public class PlayersRender : MonoBehaviour
     public Animator animator;
 
     public static PlayersRender instance;
+
+    public Text playerListText;
 
     private void Awake()
     {
@@ -71,11 +74,13 @@ public class PlayersRender : MonoBehaviour
         player.setParent(obj);
         PlayerLabel label = obj.GetComponent<PlayerLabel>();
         label.name = player.getName();
+        playerListText.text = playerListText.text + player.getName() + "\n"; 
         Debug.Log($"{player.name} just joined in ({player.location.x}, {player.location.y}).");
     }
 
     void removePlayer(Player player) {
         if(player != null && otherPlayers.ContainsKey(player.getId())) {
+            playerListText.text = playerListText.text.Replace(player.getName() + "\n", ""); 
             otherPlayers.Remove(player.getId());
             Destroy(player.getParent());
         }
